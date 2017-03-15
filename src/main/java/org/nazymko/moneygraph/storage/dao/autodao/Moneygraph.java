@@ -13,6 +13,8 @@ import javax.annotation.Generated;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
+import org.nazymko.moneygraph.storage.dao.autodao.tables.Parsedsms;
+import org.nazymko.moneygraph.storage.dao.autodao.tables.ParsedsmsDetails;
 import org.nazymko.moneygraph.storage.dao.autodao.tables.Rawsms;
 
 
@@ -29,12 +31,22 @@ import org.nazymko.moneygraph.storage.dao.autodao.tables.Rawsms;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Moneygraph extends SchemaImpl {
 
-    private static final long serialVersionUID = -888384686;
+    private static final long serialVersionUID = 1453633090;
 
     /**
      * The reference instance of <code>moneygraph</code>
      */
     public static final Moneygraph MONEYGRAPH = new Moneygraph();
+
+    /**
+     * The table <code>moneygraph.parsedsms</code>.
+     */
+    public final Parsedsms PARSEDSMS = org.nazymko.moneygraph.storage.dao.autodao.tables.Parsedsms.PARSEDSMS;
+
+    /**
+     * The table <code>moneygraph.parsedsms_details</code>.
+     */
+    public final ParsedsmsDetails PARSEDSMS_DETAILS = org.nazymko.moneygraph.storage.dao.autodao.tables.ParsedsmsDetails.PARSEDSMS_DETAILS;
 
     /**
      * The table <code>moneygraph.rawsms</code>.
@@ -66,6 +78,8 @@ public class Moneygraph extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
+            Parsedsms.PARSEDSMS,
+            ParsedsmsDetails.PARSEDSMS_DETAILS,
             Rawsms.RAWSMS);
     }
 }

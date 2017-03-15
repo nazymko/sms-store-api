@@ -9,7 +9,11 @@ import javax.annotation.Generated;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
+import org.nazymko.moneygraph.storage.dao.autodao.tables.Parsedsms;
+import org.nazymko.moneygraph.storage.dao.autodao.tables.ParsedsmsDetails;
 import org.nazymko.moneygraph.storage.dao.autodao.tables.Rawsms;
+import org.nazymko.moneygraph.storage.dao.autodao.tables.records.ParsedsmsDetailsRecord;
+import org.nazymko.moneygraph.storage.dao.autodao.tables.records.ParsedsmsRecord;
 import org.nazymko.moneygraph.storage.dao.autodao.tables.records.RawsmsRecord;
 
 
@@ -31,12 +35,16 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<ParsedsmsRecord, Long> IDENTITY_PARSEDSMS = Identities0.IDENTITY_PARSEDSMS;
+    public static final Identity<ParsedsmsDetailsRecord, Long> IDENTITY_PARSEDSMS_DETAILS = Identities0.IDENTITY_PARSEDSMS_DETAILS;
     public static final Identity<RawsmsRecord, Long> IDENTITY_RAWSMS = Identities0.IDENTITY_RAWSMS;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<ParsedsmsRecord> KEY_PARSEDSMS_PRIMARY = UniqueKeys0.KEY_PARSEDSMS_PRIMARY;
+    public static final UniqueKey<ParsedsmsDetailsRecord> KEY_PARSEDSMS_DETAILS_PRIMARY = UniqueKeys0.KEY_PARSEDSMS_DETAILS_PRIMARY;
     public static final UniqueKey<RawsmsRecord> KEY_RAWSMS_PRIMARY = UniqueKeys0.KEY_RAWSMS_PRIMARY;
 
     // -------------------------------------------------------------------------
@@ -49,10 +57,14 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 extends AbstractKeys {
+        public static Identity<ParsedsmsRecord, Long> IDENTITY_PARSEDSMS = createIdentity(Parsedsms.PARSEDSMS, Parsedsms.PARSEDSMS.ID);
+        public static Identity<ParsedsmsDetailsRecord, Long> IDENTITY_PARSEDSMS_DETAILS = createIdentity(ParsedsmsDetails.PARSEDSMS_DETAILS, ParsedsmsDetails.PARSEDSMS_DETAILS.ID);
         public static Identity<RawsmsRecord, Long> IDENTITY_RAWSMS = createIdentity(Rawsms.RAWSMS, Rawsms.RAWSMS.ID);
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
+        public static final UniqueKey<ParsedsmsRecord> KEY_PARSEDSMS_PRIMARY = createUniqueKey(Parsedsms.PARSEDSMS, "KEY_parsedsms_PRIMARY", Parsedsms.PARSEDSMS.ID);
+        public static final UniqueKey<ParsedsmsDetailsRecord> KEY_PARSEDSMS_DETAILS_PRIMARY = createUniqueKey(ParsedsmsDetails.PARSEDSMS_DETAILS, "KEY_parsedsms_details_PRIMARY", ParsedsmsDetails.PARSEDSMS_DETAILS.ID);
         public static final UniqueKey<RawsmsRecord> KEY_RAWSMS_PRIMARY = createUniqueKey(Rawsms.RAWSMS, "KEY_rawsms_PRIMARY", Rawsms.RAWSMS.ID);
     }
 }

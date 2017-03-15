@@ -1,16 +1,18 @@
 package org.nazymko.moneygraph.storage.web;
 
 import com.google.gson.Gson;
-import org.jooq.util.derby.sys.Sys;
+import org.nazymko.moneygraph.storage.dao.autodao.tables.daos.JooqParsedsmsDao;
 import org.nazymko.moneygraph.storage.dao.autodao.tables.daos.JooqRawsmsDao;
+import org.nazymko.moneygraph.storage.dao.autodao.tables.pojos.Parsedsms;
 import org.nazymko.moneygraph.storage.dao.autodao.tables.pojos.Rawsms;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by nazymko on 13.03.2017.
@@ -20,13 +22,65 @@ import java.util.List;
 public class StoreController {
     @Autowired
     JooqRawsmsDao rawsmsDao;
+    @Autowired
+    private JooqParsedsmsDao parsedsmsDao;
+
+    @ResponseBody
+    @RequestMapping(value = "cleanup/by/identification/{identification}", method = RequestMethod.GET)
+    public String cleanup(@PathVariable("identification") String identification) {
+
+        List<Rawsms> objects = rawsmsDao.fetchByDeviceId(identification);
+        rawsmsDao.delete(objects);
+
+        List<Parsedsms> parsedsms = parsedsmsDao.fetchByIdentification(identification);
+        parsedsmsDao.delete(parsedsms);
+
+        return "done : " + objects.size();
+    }
 
     @ResponseBody
     @RequestMapping(value = "put", consumes = "application/json", method = RequestMethod.POST)
-    public String put(@RequestBody HashMap<Object, Object> json) {
+    public String put(@RequestBody final HashMap<Object, Object> json) {
         System.out.println("json = " + json);
 
         rawsmsDao.insert(createPojo(json));
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Rawsms> identfication = rawsmsDao.fetchByDeviceId(String.valueOf(json.get("identification")));
+
+                List<org.nazymko.moneygraph.storage.dao.autodao.tables.pojos.Parsedsms> parsedsms = new ArrayList<>();
+                Gson gson = new Gson();
+
+                for (Rawsms rawsms : identfication) {
+                    parsedsms.add(convert(rawsms, gson));
+                }
+
+                parsedsmsDao.insert(parsedsms);
+            }
+
+            private Parsedsms convert(Rawsms rawsms, Gson gson) {
+                Map sms = gson.fromJson(rawsms.getSmsBody(), Map.class);
+                Parsedsms parsedsms = new Parsedsms();
+
+                parsedsms.setBody((String) sms.get("body"));
+                parsedsms.setDate(new Timestamp(
+                                Double.valueOf(
+                                        String.valueOf(
+                                                sms.get("date")
+                                        )
+                                ).longValue()
+                        )
+                );
+                parsedsms.setRawsmsId(rawsms.getId());
+                parsedsms.setAddressFrom((String) sms.get("address"));
+                parsedsms.setIdentification(rawsms.getDeviceId());
+
+                return parsedsms;
+            }
+        }).start();
+
 
         return "saved";
     }

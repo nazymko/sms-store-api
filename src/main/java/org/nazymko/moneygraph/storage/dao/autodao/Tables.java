@@ -6,6 +6,8 @@ package org.nazymko.moneygraph.storage.dao.autodao;
 
 import javax.annotation.Generated;
 
+import org.nazymko.moneygraph.storage.dao.autodao.tables.Parsedsms;
+import org.nazymko.moneygraph.storage.dao.autodao.tables.ParsedsmsDetails;
 import org.nazymko.moneygraph.storage.dao.autodao.tables.Rawsms;
 
 
@@ -21,6 +23,16 @@ import org.nazymko.moneygraph.storage.dao.autodao.tables.Rawsms;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>moneygraph.parsedsms</code>.
+     */
+    public static final Parsedsms PARSEDSMS = org.nazymko.moneygraph.storage.dao.autodao.tables.Parsedsms.PARSEDSMS;
+
+    /**
+     * The table <code>moneygraph.parsedsms_details</code>.
+     */
+    public static final ParsedsmsDetails PARSEDSMS_DETAILS = org.nazymko.moneygraph.storage.dao.autodao.tables.ParsedsmsDetails.PARSEDSMS_DETAILS;
 
     /**
      * The table <code>moneygraph.rawsms</code>.
