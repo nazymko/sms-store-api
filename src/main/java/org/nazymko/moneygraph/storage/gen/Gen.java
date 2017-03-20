@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by nazymko.patronus@gmail.com.
+ * Created by org.nazymko.moneygraph.org.nazymko.patronus@gmail.com.
  */
 public class Gen {
 

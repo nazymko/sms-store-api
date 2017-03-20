@@ -17,7 +17,7 @@
         <name>org.jooq.util.JavaGenerator</name>
 
         <strategy>
-            <name>org.nazymko.moneygraph.storage.gen.OpinionsCodeStrategy</name>
+            <name>org.org.nazymko.moneygraph.org.nazymko.moneygraph.storage.gen.OpinionsCodeStrategy</name>
         </strategy>
         <generate>
             <pojos>true</pojos>
@@ -58,10 +58,10 @@
 
         <target>
             <!-- The destination package of your generated classes (within the destination directory) -->
-            <packageName>org.nazymko.moneygraph.storage.dao.autodao</packageName>
+            <packageName>org.org.nazymko.moneygraph.org.nazymko.moneygraph.storage.dao.autodao</packageName>
 
             <!-- The destination directory of your generated classes -->
-            <directory>C:\Users\nazymko\IdeaProjects\sms-store-api\src\main\java\</directory>
+            <directory>C:\Users\org.nazymko.moneygraph.org.nazymko\IdeaProjects\sms-store-api\src\main\java\</directory>
         </target>
     </generator>
 </configuration>

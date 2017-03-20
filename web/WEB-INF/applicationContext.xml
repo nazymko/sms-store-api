@@ -27,6 +27,6 @@
     <bean class="org.nazymko.moneygraph.storage.dao.autodao.tables.daos.JooqParsedsmsDetailsDao">
         <constructor-arg name="configuration" ref="configuration"/>
     </bean>
-
+    <import resource="flyway.xml"/>
 
 </beans>
